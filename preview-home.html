@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Healthworkers — Preview</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          canvas: "#ffffff",
+          ink: "#222222",
+          rausch: "#ff385c",
+          "rausch-dark": "#e31c5f",
+          "surface-soft": "#f7f7f7",
+          "surface-strong": "#f2f2f2",
+          hairline: "#dddddd",
+        },
+        borderRadius: { control: "8px", card: "14px" },
+        boxShadow: { card: "rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px, rgba(0,0,0,0.1) 0 4px 8px" },
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  ::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body class="bg-canvas text-ink">
+
+  <!-- NavBar -->
+  <header class="sticky top-0 z-40 border-b border-hairline bg-canvas">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
+      <a href="#" class="flex items-center gap-2">
+        <span class="flex h-8 w-8 items-center justify-center rounded-control bg-rausch text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+        </span>
+        <span class="text-lg font-semibold tracking-tight">Healthworkers</span>
+      </a>
+      <nav class="hidden items-center gap-8 md:flex">
+        <a href="#" class="text-sm font-medium hover:text-rausch">Find a doctor</a>
+        <a href="#" class="text-sm font-medium hover:text-rausch">For clinics</a>
+        <a href="#" class="text-sm font-medium hover:text-rausch">Help</a>
+      </nav>
+      <div class="hidden items-center gap-3 md:flex">
+        <a href="#" class="text-sm font-medium px-3 py-2">Log in</a>
+        <button class="rounded-control bg-rausch px-4 py-2.5 text-sm font-medium text-white hover:bg-rausch-dark">List your clinic</button>
+      </div>
+      <button class="rounded-control p-2 md:hidden" onclick="document.getElementById('mobilenav').classList.toggle('hidden')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="mobilenav" class="hidden border-t border-hairline px-4 py-3 md:hidden">
+      <a href="#" class="block rounded-control px-3 py-3 text-sm font-medium hover:bg-surface-soft">Find a doctor</a>
+      <a href="#" class="block rounded-control px-3 py-3 text-sm font-medium hover:bg-surface-soft">For clinics</a>
+      <a href="#" class="block rounded-control px-3 py-3 text-sm font-medium hover:bg-surface-soft">Help</a>
+      <div class="mt-2 flex flex-col gap-2 border-t border-hairline pt-3">
+        <a href="#" class="rounded-control px-3 py-3 text-sm font-medium hover:bg-surface-soft">Log in</a>
+        <button class="w-full rounded-control bg-rausch px-4 py-2.5 text-sm font-medium text-white">List your clinic</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-7xl px-4 pb-8 pt-10 md:px-8 md:pt-16">
+    <div class="mx-auto max-w-2xl text-center">
+      <h1 class="text-[26px] font-semibold leading-tight tracking-tight md:text-[32px]">Find a doctor you trust, book in seconds</h1>
+      <p class="mt-2 text-sm text-ink/60 md:text-base">Verified specialists near you, with real-time slots and upfront fees.</p>
+    </div>
+    <div class="mx-auto mt-6 max-w-2xl">
+      <form class="mx-auto hidden w-full max-w-2xl items-center rounded-full border border-hairline bg-canvas shadow-card md:flex">
+        <label class="flex flex-1 items-center gap-2 px-6 py-3.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-ink/60"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1"/><circle cx="20" cy="10" r="2"/></svg>
+          <input placeholder="Specialization — Cardiologist, Dentist..." class="w-full bg-transparent text-sm outline-none placeholder:text-ink/50" />
+        </label>
+        <span class="h-6 w-px bg-hairline"></span>
+        <label class="flex flex-1 items-center gap-2 px-6 py-3.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-ink/60"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input placeholder="Area — Tehsil, city..." class="w-full bg-transparent text-sm outline-none placeholder:text-ink/50" />
+        </label>
+        <button type="button" class="mr-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-rausch text-white hover:bg-rausch-dark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </form>
+      <button class="flex w-full items-center gap-3 rounded-full border border-hairline bg-canvas px-5 py-3.5 shadow-card md:hidden">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-ink/60"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="text-sm text-ink/60">Search by specialization or area</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Trust rating moment -->
+  <section class="border-y border-hairline bg-surface-soft">
+    <div class="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 py-10 text-center md:px-8">
+      <span class="text-[64px] font-bold leading-none text-ink">4.8</span>
+      <p class="text-sm text-ink/60">Average rating across 12,400+ verified patient reviews</p>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="mx-auto max-w-7xl px-4 pt-8 md:px-8">
+    <div class="flex gap-2 overflow-x-auto pb-1">
+      <button class="shrink-0 rounded-full border border-ink bg-ink px-4 py-2 text-sm font-medium text-white">General Physician</button>
+      <button class="shrink-0 rounded-full border border-hairline px-4 py-2 text-sm font-medium hover:border-ink">Cardiologist</button>
+      <button class="shrink-0 rounded-full border border-hairline px-4 py-2 text-sm font-medium hover:border-ink">Dentist</button>
+      <button class="shrink-0 rounded-full border border-hairline px-4 py-2 text-sm font-medium hover:border-ink">Gynecologist</button>
+      <button class="shrink-0 rounded-full border border-hairline px-4 py-2 text-sm font-medium hover:border-ink">Dermatologist</button>
+      <button class="shrink-0 rounded-full border border-hairline px-4 py-2 text-sm font-medium hover:border-ink">ENT Specialist</button>
+      <button class="shrink-0 rounded-full border border-hairline px-4 py-2 text-sm font-medium hover:border-ink">Orthopedic</button>
+    </div>
+  </section>
+
+  <!-- Doctor grid -->
+  <section class="mx-auto max-w-7xl px-4 py-8 md:px-8">
+    <h2 class="mb-4 text-lg font-semibold">Top-rated near you</h2>
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+      <a href="#" class="group block overflow-hidden rounded-card border border-hairline bg-canvas hover:shadow-card">
+        <div class="relative aspect-[4/3] w-full overflow-hidden bg-surface-soft">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+          <button class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-ink hover:text-rausch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.6Z"/></svg>
+          </button>
+          <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ff385c" stroke-width="2"><path d="M12 2l2.4 1.4 2.8-.3 1.4 2.4 2.4 1.4-.3 2.8 1.4 2.4-1.4 2.4.3 2.8-2.4 1.4-1.4 2.4-2.8-.3L12 22l-2.4-1.4-2.8.3-1.4-2.4-2.4-1.4.3-2.8-1.4-2.4 1.4-2.4-.3-2.8 2.4-1.4 1.4-2.4 2.8.3Z"/><path d="m9 12 2 2 4-4"/></svg>
+            PMC Verified
+          </span>
+        </div>
+        <div class="space-y-1 p-4">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <h3 class="text-[15px] font-semibold leading-tight">Dr. Amina Khalid</h3>
+              <p class="text-sm text-ink/60">Cardiologist</p>
+            </div>
+            <div class="shrink-0 text-right">
+              <span class="text-sm font-semibold">4.9</span>
+              <span class="block text-[11px] text-ink/50">212 reviews</span>
+            </div>
+          </div>
+          <p class="flex items-center gap-1 text-xs text-ink/60">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/></svg>
+            Heart Care Clinic · Cantt, Multan
+          </p>
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-sm"><span class="font-semibold">Rs. 2000</span> <span class="text-ink/50">consultation</span></span>
+            <span class="rounded-full bg-surface-soft px-2.5 py-1 text-[11px] font-medium text-ink/70">Today, 6:30 PM</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block overflow-hidden rounded-card border border-hairline bg-canvas hover:shadow-card">
+        <div class="relative aspect-[4/3] w-full overflow-hidden bg-surface-soft">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+          <button class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-ink hover:text-rausch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.6Z"/></svg>
+          </button>
+          <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ff385c" stroke-width="2"><path d="M12 2l2.4 1.4 2.8-.3 1.4 2.4 2.4 1.4-.3 2.8 1.4 2.4-1.4 2.4.3 2.8-2.4 1.4-1.4 2.4-2.8-.3L12 22l-2.4-1.4-2.8.3-1.4-2.4-2.4-1.4.3-2.8-1.4-2.4 1.4-2.4-.3-2.8 2.4-1.4 1.4-2.4 2.8.3Z"/><path d="m9 12 2 2 4-4"/></svg>
+            PMC Verified
+          </span>
+        </div>
+        <div class="space-y-1 p-4">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <h3 class="text-[15px] font-semibold leading-tight">Dr. Bilal Ahmed</h3>
+              <p class="text-sm text-ink/60">Dentist</p>
+            </div>
+            <div class="shrink-0 text-right">
+              <span class="text-sm font-semibold">4.7</span>
+              <span class="block text-[11px] text-ink/50">98 reviews</span>
+            </div>
+          </div>
+          <p class="flex items-center gap-1 text-xs text-ink/60">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/></svg>
+            Smile Studio · Gulgasht, Multan
+          </p>
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-sm"><span class="font-semibold">Rs. 1500</span> <span class="text-ink/50">consultation</span></span>
+            <span class="rounded-full bg-surface-soft px-2.5 py-1 text-[11px] font-medium text-ink/70">Tomorrow, 10:00 AM</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block overflow-hidden rounded-card border border-hairline bg-canvas hover:shadow-card">
+        <div class="relative aspect-[4/3] w-full overflow-hidden bg-surface-soft">
+          <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=600&q=80" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+          <button class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-ink hover:text-rausch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.6Z"/></svg>
+          </button>
+          <span class="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ff385c" stroke-width="2"><path d="M12 2l2.4 1.4 2.8-.3 1.4 2.4 2.4 1.4-.3 2.8 1.4 2.4-1.4 2.4.3 2.8-2.4 1.4-1.4 2.4-2.8-.3L12 22l-2.4-1.4-2.8.3-1.4-2.4-2.4-1.4.3-2.8-1.4-2.4 1.4-2.4-.3-2.8 2.4-1.4 1.4-2.4 2.8.3Z"/><path d="m9 12 2 2 4-4"/></svg>
+            PMC Verified
+          </span>
+        </div>
+        <div class="space-y-1 p-4">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <h3 class="text-[15px] font-semibold leading-tight">Dr. Sana Riaz</h3>
+              <p class="text-sm text-ink/60">Gynecologist</p>
+            </div>
+            <div class="shrink-0 text-right">
+              <span class="text-sm font-semibold">4.8</span>
+              <span class="block text-[11px] text-ink/50">156 reviews</span>
+            </div>
+          </div>
+          <p class="flex items-center gap-1 text-xs text-ink/60">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/></svg>
+            Wellness Women's Clinic · Shah Rukn-e-Alam, Multan
+          </p>
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-sm"><span class="font-semibold">Rs. 1800</span> <span class="text-ink/50">consultation</span></span>
+            <span class="rounded-full bg-surface-soft px-2.5 py-1 text-[11px] font-medium text-ink/70">Today, 4:00 PM</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer class="border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-4 py-8 text-sm text-ink/50 md:px-8">© 2026 Healthworkers. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
