@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Stethoscope } from "lucide-react";
 import Button from "@/components/Button";
-import { loginWithEmail } from "@/lib/auth";
+import { loginWithEmail, roleHomePath } from "@/lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,23 +18,26 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { error } = await loginWithEmail(email, password);
+    const { error, role } = await loginWithEmail(email, password);
     setLoading(false);
     if (error) {
       setError(error);
       return;
     }
-    // TODO: once the Doctor/Admin Panel modules exist, read the user's
-    // role doc and route to /dashboard or /admin instead of home.
-    router.push("/");
+    // Doctors land on their dashboard, patients on their account page.
+    router.push(roleHomePath(role));
   }
 
   return (
     <main className="mx-auto flex min-h-screen max-w-sm flex-col justify-center px-4 py-12">
       <div className="mb-8 flex flex-col items-center text-center">
-        <span className="flex h-10 w-10 items-center justify-center rounded-control bg-rausch text-white">
+        <Link
+          href="/"
+          aria-label="Back to home"
+          className="flex h-10 w-10 items-center justify-center rounded-control bg-rausch text-white transition-transform hover:scale-105"
+        >
           <Stethoscope size={20} />
-        </span>
+        </Link>
         <h1 className="mt-3 text-xl font-semibold">Log in to Healthworkers</h1>
         <p className="mt-1 text-sm text-ink/60">
           Book appointments and manage your visits.

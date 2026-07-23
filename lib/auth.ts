@@ -3,8 +3,9 @@ import {
   createUserWithEmailAndPassword,
   signOut as firebaseSignOut,
   updateProfile,
+  User,
 } from "firebase/auth";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "./firebase";
 
 export type UserRole = "patient" | "doctor";
@@ -25,6 +26,8 @@ function friendlyAuthError(code: string): string {
       return "Enter a valid email address.";
     case "auth/too-many-requests":
       return "Too many attempts. Please wait a moment and try again.";
+    case "auth/unauthorized-domain":
+      return "This website isn't authorized yet in Firebase. Add it under Authentication → Settings → Authorized domains.";
     default:
       return "Something went wrong. Please try again.";
   }
@@ -33,9 +36,10 @@ function friendlyAuthError(code: string): string {
 export async function loginWithEmail(email: string, password: string) {
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
-    return { user: cred.user, error: null };
+    const role = await getUserRole(cred.user.uid);
+    return { user: cred.user, role, error: null };
   } catch (err: any) {
-    return { user: null, error: friendlyAuthError(err.code) };
+    return { user: null, role: null, error: friendlyAuthError(err.code) };
   }
 }
 
@@ -67,4 +71,20 @@ export async function registerWithEmail(
 
 export async function logout() {
   await firebaseSignOut(auth);
+}
+
+// Reads the role written to users/{uid} at signup. Used right after login
+// to decide where to redirect (doctor -> /dashboard, patient -> /account).
+export async function getUserRole(uid: string): Promise<UserRole | null> {
+  const snap = await getDoc(doc(db, "users", uid));
+  if (!snap.exists()) return null;
+  return (snap.data().role as UserRole) ?? null;
+}
+
+// Single source of truth for "where does this role land after auth" so
+// login and register never drift out of sync with each other.
+export function roleHomePath(role: UserRole | null): string {
+  if (role === "doctor") return "/dashboard";
+  if (role === "patient") return "/account";
+  return "/";
 }

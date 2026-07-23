@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Stethoscope } from "lucide-react";
+import { CheckCircle2, Stethoscope } from "lucide-react";
 import Button from "@/components/Button";
-import { registerWithEmail, UserRole } from "@/lib/auth";
+import { registerWithEmail, roleHomePath, UserRole } from "@/lib/auth";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -15,6 +15,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -26,18 +27,39 @@ export default function RegisterPage() {
       setError(error);
       return;
     }
-    // Doctor accounts land in "pending_approval" (see lib/schema.ts) once
-    // the Doctor Panel module's PMC license upload step exists — for now
-    // both roles land on the home page after signup.
-    router.push("/");
+    // Show a clear confirmation before redirecting, instead of jumping
+    // straight to the next page with no acknowledgement.
+    setSuccess(true);
+    setTimeout(() => {
+      router.push(roleHomePath(role));
+    }, 1600);
+  }
+
+  if (success) {
+    return (
+      <main className="mx-auto flex min-h-screen max-w-sm flex-col items-center justify-center px-4 py-12 text-center">
+        <CheckCircle2 size={48} className="text-rausch" />
+        <h1 className="mt-4 text-xl font-semibold">Account created!</h1>
+        <p className="mt-1 text-sm text-ink/60">
+          Welcome to Healthworkers, {name.split(" ")[0]}.{" "}
+          {role === "doctor"
+            ? "Taking you to your dashboard..."
+            : "Taking you to your account..."}
+        </p>
+      </main>
+    );
   }
 
   return (
     <main className="mx-auto flex min-h-screen max-w-sm flex-col justify-center px-4 py-12">
       <div className="mb-6 flex flex-col items-center text-center">
-        <span className="flex h-10 w-10 items-center justify-center rounded-control bg-rausch text-white">
+        <Link
+          href="/"
+          aria-label="Back to home"
+          className="flex h-10 w-10 items-center justify-center rounded-control bg-rausch text-white transition-transform hover:scale-105"
+        >
           <Stethoscope size={20} />
-        </span>
+        </Link>
         <h1 className="mt-3 text-xl font-semibold">Create your account</h1>
         <p className="mt-1 text-sm text-ink/60">
           Join Healthworkers as a patient or a doctor.
