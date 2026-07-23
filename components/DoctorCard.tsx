@@ -1,3 +1,5 @@
+"use client";
+
 import { Heart, BadgeCheck, MapPin } from "lucide-react";
 
 export interface Doctor {
