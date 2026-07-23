@@ -1,54 +1,13 @@
 import NavBar from "@/components/NavBar";
 import SearchBar from "@/components/SearchBar";
 import CategoryStrip from "@/components/CategoryStrip";
-import DoctorCard, { Doctor } from "@/components/DoctorCard";
+import DoctorCard from "@/components/DoctorCard";
+import { DOCTORS } from "@/lib/doctors-data";
 
-// Placeholder data — replace with a live Firestore query
-// (see lib/firestore/doctors.ts) once the backend module is wired up.
-const FEATURED_DOCTORS: Doctor[] = [
-  {
-    id: "dr-amina-khalid",
-    name: "Dr. Amina Khalid",
-    specialization: "Cardiologist",
-    area: "Cantt, Multan",
-    clinicName: "Heart Care Clinic",
-    rating: 4.9,
-    reviewCount: 212,
-    fee: 2000,
-    photoUrl:
-      "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80",
-    verified: true,
-    nextAvailable: "Today, 6:30 PM",
-  },
-  {
-    id: "dr-bilal-ahmed",
-    name: "Dr. Bilal Ahmed",
-    specialization: "Dentist",
-    area: "Gulgasht, Multan",
-    clinicName: "Smile Studio",
-    rating: 4.7,
-    reviewCount: 98,
-    fee: 1500,
-    photoUrl:
-      "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80",
-    verified: true,
-    nextAvailable: "Tomorrow, 10:00 AM",
-  },
-  {
-    id: "dr-sana-riaz",
-    name: "Dr. Sana Riaz",
-    specialization: "Gynecologist",
-    area: "Shah Rukn-e-Alam, Multan",
-    clinicName: "Wellness Women's Clinic",
-    rating: 4.8,
-    reviewCount: 156,
-    fee: 1800,
-    photoUrl:
-      "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=600&q=80",
-    verified: true,
-    nextAvailable: "Today, 4:00 PM",
-  },
-];
+// Swap for a live Firestore query (see lib/schema.ts DoctorDoc) once the
+// backend module is wired up — DOCTORS is shared with /search and
+// /doctor/[id] so all three stay in sync.
+const FEATURED_DOCTORS = DOCTORS;
 
 export default function HomePage() {
   return (
