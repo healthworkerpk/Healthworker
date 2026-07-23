@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Menu, X, Stethoscope } from "lucide-react";
 import Button from "./Button";
 
 const NAV_LINKS = [
   { label: "Find a doctor", href: "/search" },
-  { label: "For clinics", href: "/for-doctors" },
-  { label: "Help", href: "/help" },
+  // Routes to signup with the doctor role preselected until a dedicated
+  // "for clinics" landing page exists as its own module.
+  { label: "For clinics", href: "/auth/register" },
 ];
 
 export default function NavBar() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   return (
@@ -42,7 +45,9 @@ export default function NavBar() {
           <a href="/auth/login" className="text-sm font-medium px-3 py-2">
             Log in
           </a>
-          <Button size="sm">List your clinic</Button>
+          <Button size="sm" onClick={() => router.push("/auth/register")}>
+            List your clinic
+          </Button>
         </div>
 
         {/* Mobile hamburger */}
@@ -75,7 +80,12 @@ export default function NavBar() {
               >
                 Log in
               </a>
-              <Button className="w-full">List your clinic</Button>
+              <Button
+                className="w-full"
+                onClick={() => router.push("/auth/register")}
+              >
+                List your clinic
+              </Button>
             </div>
           </nav>
         </div>

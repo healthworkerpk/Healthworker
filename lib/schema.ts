@@ -86,3 +86,11 @@ export interface ReviewDoc {
   status: "pending" | "approved" | "rejected";
   createdAt: string;
 }
+
+export interface UserDoc {
+  id: string; // matches the Firebase Auth uid
+  name: string;
+  email: string;
+  role: "patient" | "doctor";
+  createdAt: string;
+}

@@ -3,21 +3,20 @@
 Doctor discovery & booking platform. Next.js (App Router) + Tailwind +
 Firebase + Cloudinary, deployed on Vercel.
 
-## Module 1 (this drop): Scaffold + Design System + Home Page
+## Module 1: Scaffold + Design System + Home Page — done
+## Module 2: Search & Doctor Profile — done
+## Module 3: Auth (login/register) — done
 
-- `tailwind.config.ts` — every color, radius, and shadow token from the
-  brief, named so components never hardcode a hex value.
-- `app/globals.css` — Inter font, white-canvas base, focus-visible rings,
-  reduced-motion support.
-- `components/` — `Button`, `NavBar` (hamburger sheet below 744px),
-  `SearchBar` (pill on desktop, single-tap sheet trigger on mobile),
-  `CategoryStrip`, `DoctorCard`.
-- `app/page.tsx` — home page: hero search, the 64px/700 trust rating
-  moment, specialization strip, featured doctor grid.
-- `lib/firebase.ts`, `lib/cloudinary.ts` — client setup, read from env vars.
-- `lib/schema.ts` — Firestore collection shapes (doctors, appointments,
-  ledger, billing collections, policy rules, reviews) used across every
-  later module so the data model stays consistent.
+- `app/search/page.tsx` — live filter by specialization/area + category pills.
+- `app/doctor/[id]/page.tsx` — profile page: bio, gallery, clinic/timings,
+  reviews, and `components/BookingPanel.tsx` (sticky sidebar on desktop,
+  sticky bottom bar on mobile per the brief).
+- `lib/doctors-data.ts` — single shared data source for home/search/profile;
+  swap for a Firestore query once the backend is wired up.
+- `app/auth/login/page.tsx`, `app/auth/register/page.tsx` — email/password
+  auth via Firebase, with a patient/doctor role toggle on signup.
+- `lib/auth.ts` — wraps Firebase Auth calls, translates error codes into
+  plain-language messages, writes a `users/{uid}` profile doc on signup.
 
 ## Local setup
 
@@ -36,19 +35,16 @@ npm run dev
 
 ## Roadmap (next modules, build in this order)
 
-1. **Auth & roles** — patient / doctor / admin sign-in via Firebase Auth,
-   custom claims for role-based routing.
-2. **Search & doctor profile** — Firestore query by specialization/area,
-   `app/search/page.tsx`, `app/doctor/[id]/page.tsx` with the sticky
-   mobile booking bar.
-3. **Booking flow** — slot selection, appointment write, confirmation.
-4. **Doctor panel** — dashboard, appointments manager, multi-clinic
+1. **Booking flow** — slot selection UI, appointment write to Firestore,
+   confirmation screen. `BookingPanel.tsx`'s `handleBook` is the hook point.
+2. **Doctor panel** — dashboard, appointments manager, multi-clinic
    profile + shift setup, emergency-leave toggle, ledger, withdrawal
-   requests, flash-sale creator.
-5. **Admin panel** — approvals queue, unbilled tab + login lock, the
+   requests, flash-sale creator. Login should route doctors here based on
+   their `users/{uid}.role`.
+3. **Admin panel** — approvals queue, unbilled tab + login lock, the
    Collections screen (Policy Engine auto-activation), ledger, ads/
    banner manager, location & specialization manager, review moderation.
-6. **Policy Engine** — Cloud Function that runs the amount → validity-days
+4. **Policy Engine** — Cloud Function that runs the amount → validity-days
    rule and the automatic hide-on-expiry check (scheduled function).
 
 Say which module to build next and it'll follow this same file structure.
