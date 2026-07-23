@@ -91,6 +91,26 @@ export interface UserDoc {
   id: string; // matches the Firebase Auth uid
   name: string;
   email: string;
-  role: "patient" | "doctor";
+  role: "patient" | "doctor" | "admin";
+  createdAt: string;
+}
+
+export interface WithdrawalRequestDoc {
+  id: string;
+  doctorId: string;
+  bankName: string;
+  accountTitle: string;
+  iban: string;
+  amount: number;
+  status: "pending" | "approved" | "rejected";
+  createdAt: string;
+}
+
+export interface PromotionDoc {
+  id: string;
+  doctorId: string;
+  title: string;
+  discountPercent: number;
+  validUntil: string;
   createdAt: string;
 }

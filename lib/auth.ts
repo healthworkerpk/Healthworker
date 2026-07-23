@@ -8,7 +8,7 @@ import {
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "./firebase";
 
-export type UserRole = "patient" | "doctor";
+export type UserRole = "patient" | "doctor" | "admin";
 
 // Maps raw Firebase error codes to messages a patient/doctor will actually
 // understand, instead of "Firebase: Error (auth/invalid-credential)."
@@ -84,6 +84,7 @@ export async function getUserRole(uid: string): Promise<UserRole | null> {
 // Single source of truth for "where does this role land after auth" so
 // login and register never drift out of sync with each other.
 export function roleHomePath(role: UserRole | null): string {
+  if (role === "admin") return "/admin";
   if (role === "doctor") return "/dashboard";
   if (role === "patient") return "/account";
   return "/";
