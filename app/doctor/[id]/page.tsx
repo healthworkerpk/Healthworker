@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { BadgeCheck, MapPin, Star } from "lucide-react";
-import NavBar from "@/components/NavBar";
+import TopHeader from "@/components/TopHeader";
 import BookingPanel from "@/components/BookingPanel";
 import { DOCTORS, getDoctorById } from "@/lib/doctors-data";
 
@@ -18,7 +18,7 @@ export default function DoctorProfilePage({
 
   return (
     <main>
-      <NavBar />
+      <TopHeader />
 
       {/* Extra bottom padding on mobile so content isn't hidden behind the sticky bar */}
       <div className="mx-auto max-w-5xl px-4 pb-28 pt-6 md:px-8 md:pb-12">
