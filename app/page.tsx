@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import TopHeader from "@/components/TopHeader";
-import HeroSlider from "@/components/HeroSlider";
 import SpecialForYouSection from "@/components/SpecialForYouSection";
 import DoctorCategoryGrid from "@/components/DoctorCategoryGrid";
 import FlashSaleSection from "@/components/FlashSaleSection";
@@ -20,7 +19,6 @@ export default function HomePage() {
   return (
     <main className="min-h-screen pb-20 md:pb-8">
       <TopHeader />
-      <HeroSlider slides={content.heroSlides} />
       <SpecialForYouSection slides={content.specialSlides} />
       <DoctorCategoryGrid />
       <FlashSaleSection title={content.flashSaleTitle} doctors={DOCTORS} />
