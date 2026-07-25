@@ -21,6 +21,14 @@ body {
   scrollbar-width: thin;
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Visible keyboard focus everywhere — accessibility floor */
 a:focus-visible,
 button:focus-visible,

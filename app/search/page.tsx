@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import NavBar from "@/components/NavBar";
 import CategoryStrip from "@/components/CategoryStrip";
 import DoctorCard from "@/components/DoctorCard";
+import BottomTabBar from "@/components/BottomTabBar";
 import { DOCTORS } from "@/lib/doctors-data";
 import { Search, MapPin } from "lucide-react";
 
@@ -25,10 +26,8 @@ export default function SearchPage() {
   }, [specialization, area, category]);
 
   return (
-    <main>
+    <main className="pb-20 md:pb-0">
       <NavBar />
-
-      {/* Filter bar */}
       <section className="border-b border-hairline bg-canvas">
         <div className="mx-auto max-w-7xl px-4 py-4 md:px-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-center">
@@ -81,6 +80,7 @@ export default function SearchPage() {
           </div>
         )}
       </section>
+      <BottomTabBar />
     </main>
   );
 }

@@ -6,6 +6,7 @@ import { CalendarDays, LogOut, Search } from "lucide-react";
 import { useCurrentUser } from "@/lib/useCurrentUser";
 import { logout } from "@/lib/auth";
 import Button from "@/components/Button";
+import BottomTabBar from "@/components/BottomTabBar";
 
 export default function PatientAccountPage() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function PatientAccountPage() {
   }
 
   return (
-    <main className="mx-auto max-w-2xl px-4 py-8 md:px-8">
+    <main className="mx-auto max-w-2xl px-4 py-8 pb-20 md:px-8 md:pb-8">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold">
@@ -65,6 +66,7 @@ export default function PatientAccountPage() {
           </Button>
         </div>
       </section>
+      <BottomTabBar />
     </main>
   );
 }
