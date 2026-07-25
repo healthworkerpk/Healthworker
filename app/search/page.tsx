@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import NavBar from "@/components/NavBar";
+import TopHeader from "@/components/TopHeader";
 import DoctorCard from "@/components/DoctorCard";
 import BottomTabBar from "@/components/BottomTabBar";
 import { DOCTORS } from "@/lib/doctors-data";
@@ -47,7 +47,7 @@ function SearchPageInner() {
 
   return (
     <main className="pb-20 md:pb-0">
-      <NavBar />
+      <TopHeader />
 
       {/* Filter bar */}
       <section className="border-b border-hairline bg-canvas">
