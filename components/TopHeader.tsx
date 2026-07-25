@@ -18,7 +18,7 @@ export default function TopHeader() {
   }
 
   return (
-    <header className="rounded-b-3xl bg-rausch px-4 pb-5 pt-4 text-white md:px-8">
+    <header className="sticky top-0 z-40 rounded-b-3xl bg-rausch px-4 pb-5 pt-4 text-white md:px-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         {/* Left: auto-detected location */}
         <button
