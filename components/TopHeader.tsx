@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, MapPin, Search, SlidersHorizontal } from "lucide-react";
-import ProfileMenu from "./ProfileMenu";
+import { Bell, ChevronDown, MapPin, Search, SlidersHorizontal } from "lucide-react";
+import { useLocation } from "@/lib/useLocation";
 
 export default function TopHeader() {
   const router = useRouter();
   const [query, setQuery] = useState("");
+  const { label } = useLocation();
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
@@ -19,22 +20,27 @@ export default function TopHeader() {
   return (
     <header className="rounded-b-3xl bg-rausch px-4 pb-5 pt-4 text-white md:px-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
-        {/* Left: profile / login */}
-        <ProfileMenu />
-
-        {/* Right: location */}
+        {/* Left: auto-detected location */}
         <button
           className="flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5"
           onClick={() => router.push("/search")}
         >
-          <div className="text-right">
+          <div className="text-left">
             <p className="text-[10px] leading-none text-white/70">Location</p>
-            <p className="flex items-center gap-1 text-sm font-medium leading-tight">
-              <MapPin size={13} />
-              Multan, PK
+            <p className="flex max-w-[160px] items-center gap-1 truncate text-sm font-medium leading-tight">
+              <MapPin size={13} className="shrink-0" />
+              <span className="truncate">{label}</span>
             </p>
           </div>
-          <ChevronDown size={14} />
+          <ChevronDown size={14} className="shrink-0" />
+        </button>
+
+        {/* Right: notifications */}
+        <button
+          aria-label="Notifications"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
+        >
+          <Bell size={17} />
         </button>
       </div>
 
